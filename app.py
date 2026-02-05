@@ -11,7 +11,7 @@ client = OpenAI()
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    result = None
+    text_result = None
     image_path = None
 
     if request.method == "POST":
@@ -19,13 +19,22 @@ def index():
 
         try:
             # TEXT RESPONSE
-            response = client.responses.create(
+            text_response = client.responses.create(
                 model="gpt-4.1",
-                input=prompt,
-                temperature=1.2,
-                max_output_tokens=100
+                input=[
+                    {
+                        "role": "developer",
+                        "content": "You are a smart and sassy assistant who answers clearly."
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                temperature=2,
+                max_output_tokens=50
             )
-            result = response.output_text
+            text_result = text_response.output_text
 
             # IMAGE GENERATION
             img = client.images.generate(
@@ -41,9 +50,13 @@ def index():
                 f.write(image_bytes)
 
         except Exception as e:
-            result = f"Error: {e}"
+            text_result = f"Error: {e}"
 
-    return render_template("index.html", result=result, image=image_path)
+    return render_template(
+        "index.html",
+        result=text_result,
+        image=image_path
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
