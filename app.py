@@ -2,12 +2,25 @@ from flask import Flask, render_template, request
 import openai
 import os
 from dotenv import load_dotenv
+import base64
+from openai import OpenAI 
+client = OpenAI()
 
 load_dotenv()  # Load environment variables from .env
 
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")  # Securely load API key
+img = client.images.generate(
+    model="gpt-image-1.5",
+    prompt="A cute baby sea otter",
+    n=1,
+    size="1024x1024"
+)
 
+image_bytes = base64.b64decode(img.data[0].b64_json)
+with open("output.png", "wb") as f:
+    f.write(image_bytes)
+    
 @app.route("/", methods=["GET", "POST"])
 def index():
     result = None
