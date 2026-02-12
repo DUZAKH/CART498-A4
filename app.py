@@ -40,7 +40,7 @@ def index():
             img = client.images.generate(
                 model="gpt-image-1",
                 prompt=prompt,
-                size="512x512"
+                size="1024x1024"
             )
 
             image_bytes = base64.b64decode(img.data[0].b64_json)
