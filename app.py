@@ -37,12 +37,13 @@ def index():
             text_result = text_response.output[0].content[0].text
 
             # IMAGE GENERATION
+            image_prompt = f"""You are an AI artist. Create a surreal, simple painterly, symbolic dream illustration based on the following description. Focus on key symbolic elements, figures, actions, and settings, inspired by Jungian dream analysis. Dream description: {prompt} """
             img = client.images.generate(
                 model="gpt-image-1",
-                prompt=prompt,
+                prompt=image_prompt,
                 size="1024x1024"
             )
-
+            
             image_bytes = base64.b64decode(img.data[0].b64_json)
             image_path = "static/output.png"
 
