@@ -1,4 +1,6 @@
 Link: : https://cart498-a4-36ex.onrender.com/ 
+
+
 This web app allows users to enter a dream description into a text box and receive a Jungian-style analysis of their dream along with a symbolic illustration. Both the text and image outputs are generated using OpenAI’s API. For the text analysis, the assistant is instructed to act as a Jungian dream analyst. The system prompt emphasizes interpretation of symbolic elements.Its prompted like such:  input=[
                     {
                         "role": "developer",
@@ -9,6 +11,8 @@ This web app allows users to enter a dream description into a text box and recei
                         "content": prompt
                     }
 The image generation is structured in a similar way. The AI is instructed to create a surreal, symbolic illustration that corresponds to the user’s dream description.  Its prompted like so: image_prompt = f"""You are an AI artist. Create a surreal, simple painterly, symbolic dream illustration based on the following description. Focus on key symbolic elements, figures, actions, and settings, inspired by Jungian dream analysis. Dream description: {prompt} """
+
+
 **User guide:**
 1-enter a dream description and submit the form
 2- the page displays both the textual Jungian analysis and the corresponding symbolic image. 
