@@ -34,7 +34,7 @@ def index():
                 temperature=1,
                 max_output_tokens=100
             )
-            text_result = text_response.output_text
+            text_result = text_response.output[0].content[0].text
 
             # IMAGE GENERATION
             img = client.images.generate(
